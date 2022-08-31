@@ -13,7 +13,7 @@
 // if it where, we could use https://vitejs.dev/config/server-options.html#server-origin)
 
 import { defineConfig, splitVendorChunkPlugin } from 'vite'
-import vue from '@vitejs/plugin-vue'
+import react from '@vitejs/plugin-react'
 import liveReload from 'vite-plugin-live-reload'
 import path from 'path'
 
@@ -21,14 +21,10 @@ import path from 'path'
 export default defineConfig({
 
   plugins: [
-    vue(),
-    liveReload([
-      // edit live reload paths according to your source code
-      // for example:
-      __dirname + '/(app|config|views)/**/*.php',
-      // using this for our example:
-      __dirname + '/../public/*.php',
-    ]),
+    react(),
+    liveReload(
+      __dirname + '/../public/index.php', { alwaysReload: true }
+    ),
     splitVendorChunkPlugin(),
   ],
 
@@ -48,7 +44,7 @@ export default defineConfig({
 
     // our entry
     rollupOptions: {
-      input: path.resolve(__dirname, 'src/main.js'),
+      input: path.resolve(__dirname, 'src/main.jsx'),
     }
   },
 
@@ -62,9 +58,9 @@ export default defineConfig({
 
   // required for in-browser template compilation
   // https://vuejs.org/guide/scaling-up/tooling.html#note-on-in-browser-template-compilation
-  resolve: {
-    alias: {
-      vue: 'vue/dist/vue.esm-bundler.js'
-    }
-  }
+  // resolve: {
+  //   alias: {
+  //     vue: 'vue/dist/vue.esm-bundler.js'
+  //   }
+  // }
 })

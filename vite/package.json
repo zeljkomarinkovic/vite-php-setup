@@ -3,15 +3,18 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "APP_ENV=development vite",
-    "build": "vite build"
+    "build": "vite build --watch"
   },
   "dependencies": {
-    "vue": "^3.2.37"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^3.0.0",
-    "@vue/compiler-sfc": "^3.2.37",
-    "vite": "^3.0.0",
-    "vite-plugin-live-reload": "^2.1.0"
+    "@supercharge/fs": "^3.4.0",
+    "@types/react": "^18.0.17",
+    "@types/react-dom": "^18.0.6",
+    "@vitejs/plugin-react": "^2.0.1",
+    "vite": "^3.0.9",
+    "vite-plugin-live-reload": "3.0.0"
   }
 }
