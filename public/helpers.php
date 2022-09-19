@@ -12,12 +12,27 @@ const VITE_HOST = 'http://localhost:5133';
 
 
 // Prints all the html entries needed for Vite
-
-function vite(string $entry): string
+function vite($entry)
 {
-    return "\n" . jsTag($entry)
+    $vite_host = VITE_HOST;
+    if (isDev($entry)) {
+        return <<<HTML
+            <script type="module">
+                import RefreshRuntime from "{$vite_host}/@react-refresh"
+                window.\$RefreshReg$ = () => {}
+                window.\$RefreshSig$ = () => (type) => type
+                RefreshRuntime.injectIntoGlobalHook(window)
+                window.__vite_plugin_react_preamble_installed__ = true
+            </script>
+            <script type="module" src="{$vite_host}/@vite/client"></script>
+            <script type="module" src="{$vite_host}/assets/js/website.js"></script>
+            <script src="{$vite_host}/{$entry}" type="module" defer></script>
+        HTML;
+    } else {
+        return "\n" . jsTag($entry)
         . "\n" . jsPreloadImports($entry)
         . "\n" . cssTag($entry);
+    }
 }
 
 
